@@ -8,10 +8,10 @@ void *mx_realloc(void *ptr, size_t size) {
         free(ptr);
         return NULL;
     }
-    if (size <= malloc_usable_size(ptr)) { //malloc_usable_size(ptr)
+    if (size <= malloc_size(ptr)) { //malloc_usable_size(ptr)
         return ptr;
     }
-    if (size > malloc_usable_size(ptr)) {
+    if (size > malloc_size(ptr)) {
         void *new_ptr = malloc(size);
         if (new_ptr != NULL) {
             mx_memmove(new_ptr, ptr, size);
