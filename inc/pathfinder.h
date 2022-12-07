@@ -27,6 +27,7 @@ void mx_check_islands(char *vertix1, char *vertix2, char **array, char **arr_str
 void mx_clean_arr_int(int **array, int length);
 char *mx_part1(char *s);
 char *mx_part2(char *s);
+char *mx_part4(char *s);
 void matrix_full(char **array_str, char **array, int lines, int count_islands, int **matrix);
 int mx_return_index_element(char **array, char *element, int count_islands);
 int **matrix_empty(int count_islands);

@@ -1,38 +1,35 @@
 NAME = pathfinder
 
-CFLG = -std=c11 -Wall -Wextra -Werror -Wpedantic -g
+INC = $(wildcard inc/*.h)
+SRC = $(wildcard src/*.c)
+OBJ = $(addprefix obj/, $(notdir $(SRC:%.c=%.o)))
 
-INC_FILES = $(wildcard inc/*.h)
-SRC_FILES = $(wildcard src/*.c)
-OBJ_FILES = $(addprefix obj/, $(notdir $(SRC_FILES:%.c=%.o)))
+LIBMX = libmx
+SRC_LIB = $(LIBMX)/libmx.a
+INC_LIB = $(LIBMX)/inc
 
-LMX_DIR	= libmx
-LMX_A:=	$(LMX_DIR)/libmx.a
-LMX_INC:= $(LMX_DIR)/inc
+all: $(SRC_LIB) $(NAME)
 
-all: $(LMX_A) $(NAME)
+$(NAME): $(OBJ)
+	clang -std=c11 -Wall -Wextra -Werror -Wpedantic -g $(OBJ) -L$(LIBMX) -lmx -o $@
 
+obj/%.o: src/%.c $(INC)
+	clang -std=c11 -Wall -Wextra -Werror -Wpedantic -g -c $< -o $@ -I inc -I $(INC_LIB)
 
-$(NAME): $(OBJ_FILES)
-	@clang $(CFLG) $(OBJ_FILES) -L$(LMX_DIR) -lmx -o $@
-
-obj/%.o: src/%.c $(INC_FILES)
-	@clang $(CFLG) -c $< -o $@ -I inc -I $(LMX_INC)
-
-$(OBJ_FILES): | obj
+$(OBJ): | obj
 
 obj:
-	@mkdir -p $@
+	mkdir -p $@
 
-$(LMX_A):
-	@make -sC $(LMX_DIR)
+$(SRC_LIB):
+	make -sC $(LIBMX)
 	
 clean:
-	@rm -rf obj
+	rm -rf obj
 
 uninstall:
-	@make -sC $(LMX_DIR) $@
-	@rm -rf obj
-	@rm -rf $(NAME)
+	make -sC $(LIBMX) $@
+	rm -rf obj
+	rm -rf $(NAME)
 
 reinstall: uninstall all

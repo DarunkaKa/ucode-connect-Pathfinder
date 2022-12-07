@@ -8,8 +8,7 @@
 #include <fcntl.h>
 #include <sys/types.h>
 #include <sys/stat.h>
-//#include <malloc.h>
-#include <malloc/malloc.h>
+#include <malloc.h>
 #include <wchar.h>
 
 //utils pack
@@ -98,3 +97,4 @@ int mx_memncmp(const void *s1, const void *s2, size_t n);
 char *check_zero(int number);
 int mx_counter_int(int number);
 void mx_swap(char **s1, char **s2);
+

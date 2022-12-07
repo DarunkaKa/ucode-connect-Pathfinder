@@ -7,7 +7,7 @@ char *mx_strtrim(const char *str) {
 	
 	int new_count = 0;
 	int front = mx_front_spaces(str);
-	int back = 0;//mx_back_spaces(str);
+	int back = mx_back_spaces(str);
 
 	if (front + back < mx_strlen(str)) {
 		new_count = mx_strlen(str) - (front + back);
@@ -15,7 +15,7 @@ char *mx_strtrim(const char *str) {
 	else {
 		return NULL; //mx_strnew(0)
 	}
-	
+		
 	str += front;
 	char *new = mx_strnew(new_count);
 

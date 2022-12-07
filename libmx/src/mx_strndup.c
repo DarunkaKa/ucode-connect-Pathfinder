@@ -5,7 +5,12 @@ char *mx_strndup(const char *s1, size_t n) {
 		return NULL;
 	}
 	char *temp = mx_strnew(n);
-	return mx_strncpy(temp, s1, n);
+	size_t i = 0;
+	while (i < n) {
+		temp[i] = s1[i];
+		i++;
+	}
+	temp[i] = '\0';
+	return temp;
 }
-
 

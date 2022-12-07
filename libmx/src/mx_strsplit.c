@@ -30,9 +30,8 @@ char **mx_strsplit(char const *s, char c) {
 		if (s[0] != c) {
 			count_letter = mx_count_letters(s, c);
 			
-			if (count_letter > 0) {
-				new_arr[j++] = mx_strndup(s, count_letter);
-			}
+			if (count_letter > 0) new_arr[j++] = mx_strndup(s, count_letter);
+			
 			s += count_letter;
 		}
 		s++;
